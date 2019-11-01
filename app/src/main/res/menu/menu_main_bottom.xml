@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="사진관리"
+        android:id="@+id/MainBottom.menu_picture"
+        android:icon="@drawable/ic_picture"/>
+
+    <item android:title="메뉴정하러가기"
+        android:id="@+id/MainBottom.menu_restaurant"
+        android:icon="@drawable/ic_restaurant"/>
+
+    <item android:title="음식점찾기"
+        android:id="@+id/MainBottom.menu_search"
+        android:icon="@drawable/ic_search"/>
+
+</menu>
