@@ -4,5 +4,6 @@ public class G {
 
     static boolean isUseServer=false;
     static boolean isUseGPS=false;
+    static MainActivity main;
 
 }

@@ -52,6 +52,7 @@
             app:itemTextColor="#FFFFFF"
             app:itemIconSize="24dp"
             app:labelVisibilityMode="labeled"
+            app:itemRippleColor="@color/colorAccent"
             />
 
     </LinearLayout>
@@ -62,8 +63,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/menu_main_navigation"
-        />
+        >
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.factory.salmon.pickranmenu.MainNavigationMenu"
+            android:layout_marginTop="150dp"
+            />
+
+    </com.google.android.material.navigation.NavigationView>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
