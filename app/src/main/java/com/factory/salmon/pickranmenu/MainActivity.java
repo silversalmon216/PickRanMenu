@@ -20,6 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final static int DATABASE_VERSION=1;
     final static String PREFERENCES_NAME="PreferencesPickRanMenuAPP";
     final static String PREFERENCES_KEY_ISDB="IsDatabaseCreated";
 
@@ -59,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
         preferences_database=getSharedPreferences(PREFERENCES_NAME,MODE_PRIVATE);
         menuDataBase=new MenuDataBase(this);
-        if(preferences_database.getInt(PREFERENCES_KEY_ISDB,0)!=1){
+        if(preferences_database.getInt(PREFERENCES_KEY_ISDB,0)!=DATABASE_VERSION){
             menuDataBase.InsertMenu();
-            preferences_database.edit().putInt(PREFERENCES_KEY_ISDB,1).commit();
+            preferences_database.edit().putInt(PREFERENCES_KEY_ISDB,DATABASE_VERSION).commit();
         }
 
     }
@@ -73,8 +74,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void FragmentChange(int index){
+        Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show();
         if(index==1){
-
+            Toast.makeText(this, "bbb", Toast.LENGTH_SHORT).show();
+            menuDataBase.SwitchMenu("김밥");
         }
     }
 

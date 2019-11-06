@@ -13,8 +13,6 @@ public class MenuDataBase {
 
     SQLiteDatabase database_menu;
 
-    SharedPreferences pref;
-
     Context context;
 
     public MenuDataBase(Context context) {
@@ -57,6 +55,30 @@ public class MenuDataBase {
         }
         new AlertDialog.Builder(context).setMessage(buffer.toString()).setPositiveButton("OK",null).create().show();
 
+    }
+
+    public void SelectMenu(String menu){
+        Cursor cursor=database_menu.rawQuery("SELECT menuNum FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
+        cursor.moveToFirst();
+        database_menu.execSQL("UPDATE " + TABLE_NAME + " SET menuNum=" + (cursor.getInt(0)+1) + " WHERE menuName=?",new String[]{menu});
+
+        Cursor c=database_menu.rawQuery("SELECT menuNum FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
+        c.moveToFirst();
+        new AlertDialog.Builder(context).setMessage(menu+" : "+c.getInt(0)).setPositiveButton("OK",null).create().show();
+    }
+
+    public void SwitchMenu(String menu){
+        Cursor cursor=database_menu.rawQuery("SELECT OnOff FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
+        cursor.moveToFirst();
+        int OnOff=2;
+        OnOff= cursor.getInt(0)==0 ? 1 : 0;
+        if(OnOff==2)    return;
+
+        database_menu.execSQL("UPDATE "+TABLE_NAME + " SET OnOff=" + OnOff + " WHERE menuName=?",new String[]{menu});
+
+        Cursor c=database_menu.rawQuery("SELECT OnOff FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
+        c.moveToFirst();
+        new AlertDialog.Builder(context).setMessage(menu+" : "+c.getInt(0)).setPositiveButton("OK",null).create().show();
     }
 
 }

@@ -39,8 +39,8 @@ public class MainNavigationMenu extends PreferenceFragment {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
             if(s.equals("menu")) {
-                G.main.drawer.closeDrawer(G.main.navigation);
-                G.main.FragmentChange(1);
+//                G.main.drawer.closeDrawer(G.main.navigation);
+//                G.main.FragmentChange(1);
             }
         }
     };
@@ -48,7 +48,10 @@ public class MainNavigationMenu extends PreferenceFragment {
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
-        if(preference.getKey().equals("menu"))  G.main.drawer.closeDrawer(G.main.navigation);
+        if(preference.getKey().equals("menu")){
+            G.main.drawer.closeDrawer(G.main.navigation);
+            G.main.FragmentChange(1);
+        }
 
         return false;
     }
