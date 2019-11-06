@@ -6,7 +6,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -21,7 +20,6 @@ public class MainNavigationMenu extends PreferenceFragment {
         addPreferencesFromResource(R.xml.menu_main_navigation);
 
         preferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-
 
     }
 
@@ -42,7 +40,7 @@ public class MainNavigationMenu extends PreferenceFragment {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
             if(s.equals("menu")) {
                 G.main.drawer.closeDrawer(G.main.navigation);
-                G.main.ClickA();
+                G.main.FragmentChange(1);
             }
         }
     };

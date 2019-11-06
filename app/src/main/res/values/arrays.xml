@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="menu">
+        <item>김밥</item>
+        <item>짬뽕</item>
+        <item>해장국</item>
+        <item>햄버거</item>
+        <item>피자</item>
+        <item>라면</item>
+    </string-array>
+
+    <string-array name="taste">
+        <item>매운맛</item>
+        <item>단맛</item>
+        <item>밀가루</item>
+        <item>쌀</item>
+        <item>인스턴트</item>
+        <item>한식</item>
+    </string-array>
+
+</resources>

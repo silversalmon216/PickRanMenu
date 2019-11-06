@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,16 +20,18 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    static final private String SETTINGKEY_SERVER="isOnServer";
-    static final private String SETTINGKEY_GPS="isOnGPS";
+    final static String PREFERENCES_NAME="PreferencesPickRanMenuAPP";
+    final static String PREFERENCES_KEY_ISDB="IsDatabaseCreated";
 
     public DrawerLayout drawer;
     public NavigationView navigation;
 
-    private SharedPreferences preferences;
+    private SharedPreferences preferences_fragment;
+    private SharedPreferences preferences_database;
     private Toolbar toolbar;
 
     private ActionBarDrawerToggle toggle;
+    private MenuDataBase menuDataBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,23 +52,30 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
         drawer.addDrawerListener(toggle);
 
-        preferences=getSharedPreferences("Setting",MODE_PRIVATE);
+        preferences_fragment= PreferenceManager.getDefaultSharedPreferences(this);
 
-        G.isUseServer=preferences.getBoolean("isOnServer",false);
-        G.isUseGPS=preferences.getBoolean("isOnGPS",false);
+        G.isUseServer=preferences_fragment.getBoolean("isOnServer",false);
+        G.isUseGPS=preferences_fragment.getBoolean("isOnGPS",false);
 
-        Toast.makeText(this, "11"+getIntent().getStringExtra("a"), Toast.LENGTH_SHORT).show();
+        preferences_database=getSharedPreferences(PREFERENCES_NAME,MODE_PRIVATE);
+        menuDataBase=new MenuDataBase(this);
+        if(preferences_database.getInt(PREFERENCES_KEY_ISDB,0)!=1){
+            menuDataBase.InsertMenu();
+            preferences_database.edit().putInt(PREFERENCES_KEY_ISDB,1).commit();
+        }
 
-    }
-
-    public void ClickA(){
-        Toast.makeText(this, "asdfqwer", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         toggle.onOptionsItemSelected(item);
         return super.onOptionsItemSelected(item);
+    }
+
+    public void FragmentChange(int index){
+        if(index==1){
+
+        }
     }
 
 }
