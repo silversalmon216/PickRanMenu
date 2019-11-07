@@ -25,7 +25,7 @@ public class MenuDataBase {
     public void InsertMenu(){
         String dataBase_key1="(menuName text not null, menuNum ubteger, OnOff integer";
         String dataBase_key2="(menuName, menuNum, OnOff";
-        for(String a : context.getResources().getStringArray(R.array.taste)){
+        for(String a : context.getResources().getStringArray(R.array.favor)){
             dataBase_key1=dataBase_key1+", "+a+" integer";
             dataBase_key2=dataBase_key2+", "+a;
         }
@@ -67,18 +67,27 @@ public class MenuDataBase {
         new AlertDialog.Builder(context).setMessage(menu+" : "+c.getInt(0)).setPositiveButton("OK",null).create().show();
     }
 
-    public void SwitchMenu(String menu){
-        Cursor cursor=database_menu.rawQuery("SELECT OnOff FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
-        cursor.moveToFirst();
-        int OnOff=2;
-        OnOff= cursor.getInt(0)==0 ? 1 : 0;
-        if(OnOff==2)    return;
+    public void SwitchMenu(String menu, boolean isMakeOn){
+        int isOn= isMakeOn ? 1 : 0;
 
-        database_menu.execSQL("UPDATE "+TABLE_NAME + " SET OnOff=" + OnOff + " WHERE menuName=?",new String[]{menu});
+//        Cursor cursor=database_menu.rawQuery("SELECT OnOff FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
+//        cursor.moveToFirst();
+//        int OnOff=2;
+//        OnOff= cursor.getInt(0)==0 ? 1 : 0;
+//        if(OnOff==2)    return;
+
+        database_menu.execSQL("UPDATE "+TABLE_NAME + " SET OnOff=" + isOn + " WHERE menuName=?",new String[]{menu});
 
         Cursor c=database_menu.rawQuery("SELECT OnOff FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
         c.moveToFirst();
         new AlertDialog.Builder(context).setMessage(menu+" : "+c.getInt(0)).setPositiveButton("OK",null).create().show();
+    }
+
+    public void SwitchFavor(String favor, boolean isMakeOn){
+        Cursor cursor=database_menu.rawQuery("SELECT menuName, OnOff FROM " + TABLE_NAME + " WHERE " + favor + "=?",new String[]{"1"});
+        while(cursor.moveToNext()){
+            SwitchMenu(cursor.getString(0),isMakeOn);
+        }
     }
 
 }

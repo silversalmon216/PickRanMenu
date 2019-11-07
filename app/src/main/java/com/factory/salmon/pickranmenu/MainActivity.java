@@ -21,11 +21,11 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private final static int DATABASE_VERSION=1;
-    final static String PREFERENCES_NAME="PreferencesPickRanMenuAPP";
-    final static String PREFERENCES_KEY_ISDB="IsDatabaseCreated";
+    private final static String PREFERENCES_NAME="PreferencesPickRanMenuAPP";
+    private final static String PREFERENCES_KEY_ISDB="IsDatabaseCreated";
 
     public DrawerLayout drawer;
-    public NavigationView navigation;
+    private NavigationView navigation;
 
     private SharedPreferences preferences_fragment;
     private SharedPreferences preferences_database;
@@ -60,9 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
         preferences_database=getSharedPreferences(PREFERENCES_NAME,MODE_PRIVATE);
         menuDataBase=new MenuDataBase(this);
+        String[] favors=getResources().getStringArray(R.array.favor);
         if(preferences_database.getInt(PREFERENCES_KEY_ISDB,0)!=DATABASE_VERSION){
             menuDataBase.InsertMenu();
-            preferences_database.edit().putInt(PREFERENCES_KEY_ISDB,DATABASE_VERSION).commit();
+            SharedPreferences.Editor edit=preferences_database.edit();
+            edit.putInt(PREFERENCES_KEY_ISDB,DATABASE_VERSION);
+            for(String favor : favors)
+                edit.putBoolean(favor,true);
+            edit.commit();
         }
 
     }
@@ -77,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show();
         if(index==1){
             Toast.makeText(this, "bbb", Toast.LENGTH_SHORT).show();
-            menuDataBase.SwitchMenu("김밥");
+//            menuDataBase.SwitchMenu("김밥",true);
+            menuDataBase.SwitchFavor("쌀",false);
         }
     }
 

@@ -10,7 +10,7 @@
         <item>라면</item>
     </string-array>
 
-    <string-array name="taste">
+    <string-array name="favor">
         <item>매운맛</item>
         <item>단맛</item>
         <item>밀가루</item>
