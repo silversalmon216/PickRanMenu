@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 public class MenuDataBase {
 
     private final static String DB_NAME="menuDB.db";
@@ -88,6 +90,19 @@ public class MenuDataBase {
         while(cursor.moveToNext()){
             SwitchMenu(cursor.getString(0),isMakeOn);
         }
+    }
+
+    public ArrayList<Integer> GetArrayList(String select){
+
+        Cursor cursor=database_menu.rawQuery("SELECT " + select + " FROM " + TABLE_NAME,null);
+        ArrayList arr=new ArrayList<>();
+
+        while(cursor.moveToNext()){
+            arr.add(cursor.getInt(0));
+        }
+
+        return arr;
+
     }
 
 }

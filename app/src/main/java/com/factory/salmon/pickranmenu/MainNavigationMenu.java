@@ -38,9 +38,11 @@ public class MainNavigationMenu extends PreferenceFragment {
     SharedPreferences.OnSharedPreferenceChangeListener preferencesListener=new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-            if(s.equals("menu")) {
-//                G.main.drawer.closeDrawer(G.main.navigation);
-//                G.main.FragmentChange(1);
+            if(s.equals("isOnServer")) {
+                G.isUseServer=sharedPreferences.getBoolean(s,false);
+            }
+            else if(s.equals("isOnGPS")){
+                G.isUseGPS=sharedPreferences.getBoolean(s,false);
             }
         }
     };
@@ -50,7 +52,7 @@ public class MainNavigationMenu extends PreferenceFragment {
 
         if(preference.getKey().equals("menu")){
             G.main.drawer.closeDrawer(G.main.navigation);
-            G.main.FragmentChange(1);
+            G.main.FragmentChange(2);
         }
 
         return false;

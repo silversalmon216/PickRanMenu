@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme_Toolbar">
+        <item name="android:background">@color/design_default_color_secondary_variant</item>
+        <item name="titleTextColor">#FFFFFF</item>
+        <item name="colorControlNormal">#FFFFFF</item>
+    </style>
+
 </resources>

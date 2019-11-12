@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.factory.salmon.pickranmenu.RegularTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="?android:attr/dropDownItemStyle"
+    android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
+    android:singleLine="true"
+    android:textSize="14sp"
+    android:ellipsize="marquee"
+    >
+
+</com.factory.salmon.pickranmenu.RegularTextView>
