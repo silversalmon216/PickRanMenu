@@ -3,20 +3,48 @@
 
     <string-array name="menu">
         <item>김밥</item>
+        <item>고기</item>
+        <item>감자탕</item>
+        <item>덮밥</item>
+        <item>돈가스</item>
+        <item>도시락</item>
+        <item>라면</item>
+        <item>부대찌개</item>
+        <item>보쌈</item>
+        <item>빵</item>
+        <item>생선구이</item>
+        <item>양꼬치</item>
+        <item>양장피</item>
+        <item>오무라이스</item>
+        <item>제육볶음</item>
+        <item>죽</item>
+        <item>족발</item>
+        <item>찜닭</item>
         <item>짬뽕</item>
+        <item>자장면</item>
+        <item>치킨</item>
+        <item>카레</item>
+        <item>탕수육</item>
+        <item>회</item>
         <item>해장국</item>
         <item>햄버거</item>
         <item>피자</item>
-        <item>라면</item>
+        <item>파스타</item>
     </string-array>
 
     <string-array name="favor">
         <item>매운맛</item>
         <item>단맛</item>
-        <item>밀가루</item>
-        <item>쌀</item>
+        <item>느끼한맛</item>
         <item>인스턴트</item>
         <item>한식</item>
+        <item>중식</item>
+        <item>양식</item>
+        <item>밀가루</item>
+        <item>밥</item>
+        <item>튀김</item>
+        <item>찌개</item>
+        <item>고기</item>
     </string-array>
 
 </resources>

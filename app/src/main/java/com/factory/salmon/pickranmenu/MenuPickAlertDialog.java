@@ -1,71 +1,64 @@
 package com.factory.salmon.pickranmenu;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MenuListNumFragment extends Fragment {
+public class MenuPickAlertDialog {
 
-    RecyclerView recyclerView;
+    RecyclerView recycler;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    int[] menuNumMaxResult=new int[3];
+    int[] menuNumResult=new int[3];
 
-        View v=inflater.inflate(R.layout.fragment_menu_list_recycler,container,false);
+    public MenuPickAlertDialog() {
 
-        recyclerView=v.findViewById(R.id.MenuList_recycler);
+        View v=G.main.getLayoutInflater().inflate(R.layout.dialog_pick_menu,null,false);
+        recycler=v.findViewById(R.id.pickMenu_dialog_recycler);
 
-        recyclerView.setAdapter(new RecyclerView.Adapter() {
+        recycler.setAdapter(new RecyclerView.Adapter() {
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                View v=getActivity().getLayoutInflater().inflate(R.layout.item_menu_list_num,parent,false);
-                VH holder=new VH(v);
+                View v=G.main.getLayoutInflater().inflate(R.layout.item_menu_list_num,parent,false);
+                ViewHolder vh=new ViewHolder(v);
 
-                return holder;
+                return vh;
             }
 
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
-                final VH vh=(VH)holder;
+                final ViewHolder vh=(ViewHolder)holder;
                 vh.txtMenuNum.setText(G.menuNumSort[position]);
 
                 ArrayList<String> arr=new ArrayList<>();
-                for(int i=0;i<G.menuNumMax[position]+1;i++){ arr.add(i+"개"); }
-                vh.spinnerMenuNumMax.setOnItemSelectedListener(null);
+                for(int i=0;i<G.menuNumMax[position]+1;i++) arr.add(i+"개");
                 vh.spinnerMenuNum.setOnItemSelectedListener(null);
+                vh.spinnerMenuNumMax.setOnItemSelectedListener(null);
                 vh.spinnerMenuNumMax.setAdapter(new ArrayAdapter<>(G.main,R.layout.custom_simple_spinner_dropdown_item,arr));
                 vh.spinnerMenuNumMax.setSelection(G.menuNumSelect[position]);
-                final boolean[] isFirst = {true};
+                final boolean[] isFirst={true};
                 vh.spinnerMenuNumMax.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                        String key="";
-                        if(position==0) key=G.main.PREFERENCES_KEY_NUM_RECENT_SELECT;
-                        else if(position==1)    key=G.main.PREFERENCES_KEY_NUM_FAVORITE_SELECT;
-                        else if(position==2)    key=G.main.PREFERENCES_KEY_NUM_SERVER_SELECT;
-                        G.main.SetMenuNum(key,i);
-                        G.menuNumSelect[position]=i;
+                        menuNumMaxResult[position]=i;
 
                         ArrayList<String> ar=new ArrayList<>();
-                        for(int j=0;j<i+1;j++)    ar.add(j+"개");
+                        for(int n=0;n<i+1;n++)    ar.add(n+"개");
 
                         vh.spinnerMenuNum.setAdapter(new ArrayAdapter<>(G.main,R.layout.custom_simple_spinner_dropdown_item,ar));
 
@@ -80,22 +73,14 @@ public class MenuListNumFragment extends Fragment {
                     @Override public void onNothingSelected(AdapterView<?> adapterView) { }
                 });
 
-//                vh.spinnerMenuNum.setAdapter(new ArrayAdapter<>(G.main,R.layout.custom_simple_spinner_dropdown_item,arr));
-//                vh.spinnerMenuNum.setSelection(menuNum[position]);
                 vh.spinnerMenuNum.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        String key="";
-                        if(position==0)    key=G.main.PREFERENCES_KEY_NUM_RECENT;
-                        else if(position==1)   key=G.main.PREFERENCES_KEY_NUM_FAVORITE;
-                        else if(position==2)   key=G.main.PREFERENCES_KEY_NUM_SERVER;
-                        G.main.SetMenuNum(key,i);
-                        G.menuNum[position]=i;
+                        menuNumResult[position]=i;
                     }
 
                     @Override public void onNothingSelected(AdapterView<?> adapterView) { }
                 });
-
 
             }
 
@@ -104,13 +89,13 @@ public class MenuListNumFragment extends Fragment {
                 return 3;
             }
 
-            class VH extends RecyclerView.ViewHolder{
+            class ViewHolder extends RecyclerView.ViewHolder{
 
                 TextView txtMenuNum;
                 Spinner spinnerMenuNumMax;
                 Spinner spinnerMenuNum;
 
-                public VH(@NonNull View itemView) {
+                public ViewHolder(@NonNull View itemView) {
                     super(itemView);
 
                     txtMenuNum=itemView.findViewById(R.id.MenuList_Num_item_txt);
@@ -119,11 +104,24 @@ public class MenuListNumFragment extends Fragment {
 
                 }
             }
-
         });
 
-        return v;
-    }
 
+
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(G.main).setView(v);
+        builder.setNegativeButton("CANCEL",null).setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Bundle bundle=new Bundle();
+                bundle.putIntArray("menuNumMaxResult",menuNumMaxResult);
+                bundle.putIntArray("menuNumResult",menuNumResult);
+                G.main.FragmentChange(3,bundle);
+            }
+        });
+        builder.create().show();
+
+
+    }
 
 }

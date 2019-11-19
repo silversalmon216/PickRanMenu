@@ -52,7 +52,7 @@ public class MainNavigationMenu extends PreferenceFragment {
 
         if(preference.getKey().equals("menu")){
             G.main.drawer.closeDrawer(G.main.navigation);
-            G.main.FragmentChange(2);
+            G.main.FragmentChange(2,null);
         }
 
         return false;

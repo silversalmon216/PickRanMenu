@@ -4,23 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     public DrawerLayout drawer;
     public NavigationView navigation;
+    private BottomNavigationView bottomNavigation;
 
     private SharedPreferences preferences_fragment;
     private SharedPreferences preferences_database;
@@ -60,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         drawer=findViewById(R.id.Main_drawer);
         navigation=findViewById(R.id.Main_navigation);
         toolbar=findViewById(R.id.Main_toolbar);
+        bottomNavigation=findViewById(R.id.Main_bottomNavigation);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -68,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toggle.syncState();
         drawer.addDrawerListener(toggle);
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationListener());
 
         preferences_fragment= PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -116,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             G.favorOnOff[i]=preferences_database.getBoolean(favor[i],true);
         }
 
-        FragmentChange(1);
+        FragmentChange(1,null);
     }
 
     @Override
@@ -134,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         preferences_database.edit().putInt(key,num).commit();
     }
 
-    public void FragmentChange(int index){
+    public void FragmentChange(int index, Bundle bundle){
 
         switch(index){
 
@@ -146,10 +142,39 @@ public class MainActivity extends AppCompatActivity {
                 currentFragment=new MenuListFragment();
                 break;
 
+            case 3:
+                currentFragment=new MenuPickFragment(bundle);
+                break;
+
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.Main_frame,currentFragment).commit();
 
+    }
+
+    private class BottomNavigationListener implements BottomNavigationView.OnNavigationItemSelectedListener {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            switch(item.getItemId()){
+                case R.id.Main_Bottom_menu_picture:
+
+                    break;
+
+                case R.id.Main_Bottom_menu_restaurant:
+
+                    new MenuPickAlertDialog();
+                    break;
+
+                case R.id.Main_Bottom_menu_search:
+
+                    break;
+
+            }
+
+            return true;
+        }
     }
 
 }

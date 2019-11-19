@@ -1,5 +1,6 @@
 package com.factory.salmon.pickranmenu;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,10 +59,14 @@ public class MenuListMenuFragment extends Fragment {
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
                 VH viewHolder=(VH)holder;
                 viewHolder.txt_menuName.setText(menuList.get(position));
-                viewHolder.switch_menu.setChecked(true);
-                if(isOnList.get(position)==0)   viewHolder.switch_menu.setChecked(false);
+                viewHolder.switch_menu.setOnCheckedChangeListener(null);
 
-                SwitchListener listener=new SwitchListener(menuList.get(position));
+                if(isOnList.get(position)==0)
+                    viewHolder.switch_menu.setChecked(false);
+                else
+                    viewHolder.switch_menu.setChecked(true);
+
+                SwitchListener listener=new SwitchListener(menuList.get(position),position);
                 viewHolder.switch_menu.setOnCheckedChangeListener(listener);
 
             }
@@ -95,14 +100,19 @@ public class MenuListMenuFragment extends Fragment {
     private class SwitchListener implements CompoundButton.OnCheckedChangeListener{
 
         String menu;
+        int index;
 
-        public SwitchListener(String menu){
+        public SwitchListener(String menu, int index){
             this.menu=menu;
+            this.index=index;
         }
 
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
             G.main.menuDataBase.SwitchMenu(menu,b);
+            int isOn= b ? 1 : 0;
+            isOnList.set(index,isOn);
+//            new AlertDialog.Builder(G.main).setMessage(index+" - "+isOnList.get(index)+" - "+menu+" - "+b).setPositiveButton("OK",null).create().show();
         }
     }
 

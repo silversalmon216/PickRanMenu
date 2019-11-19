@@ -48,6 +48,7 @@ public class MenuListFavorFragment extends Fragment {
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
                 ViewHolder vh=(ViewHolder)holder;
+                vh.switch_favor.setOnCheckedChangeListener(null);
 
                 vh.txt_favor.setText(favor.get(position));
                 vh.switch_favor.setChecked(true);

@@ -75,7 +75,7 @@ public class MenuListFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId()==R.id.Menu_menuList_done){
-            G.main.FragmentChange(1);
+            G.main.FragmentChange(1,null);
         }
 
         return super.onOptionsItemSelected(item);
