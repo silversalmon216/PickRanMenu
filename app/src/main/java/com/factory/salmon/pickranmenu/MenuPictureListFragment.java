@@ -23,12 +23,12 @@ public class MenuPictureListFragment extends Fragment {
         View v=inflater.inflate(R.layout.fragment_menu_list_recycler,container,false);
         recycler=v.findViewById(R.id.MenuList_recycler);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return v;
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-
+        inflater.inflate(R.menu.menu_menu_picture_list,menu);
     }
 }
