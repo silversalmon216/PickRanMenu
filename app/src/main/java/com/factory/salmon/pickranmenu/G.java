@@ -1,8 +1,6 @@
 package com.factory.salmon.pickranmenu;
 
 
-import java.util.ArrayList;
-
 public class G {
 
     static boolean isUseServer=false;
