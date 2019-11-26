@@ -22,6 +22,13 @@ public class MenuDataBase {
         this.context=context;
         database_menu=context.openOrCreateDatabase(DB_NAME,Context.MODE_PRIVATE,null);
 
+
+//        Cursor cur=database_menu.rawQuery("SELECT menuName,pictureUri FROM " + TABLE_NAME,null);
+//        cur.moveToFirst();
+//        while(cur.moveToNext()) {
+//            new AlertDialog.Builder(G.main).setMessage(cur.getString(0)+" - "+cur.getInt(0)).setPositiveButton("OK",null).create().show();
+//        }
+
     }
 
     public void InsertMenu(){
@@ -40,34 +47,34 @@ public class MenuDataBase {
 
             String dataBase_Value=" VALUES('" + b + "',0,1,";
 
-            if(b.equals("김밥"))  dataBase_Value=dataBase_Value+"'김밥&분식', '"+R.drawable.picture+"', 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)";
-            else if(b.equals("고기"))  dataBase_Value=dataBase_Value+"'고기', '"+R.drawable.picture+"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
-            else if(b.equals("감자탕"))  dataBase_Value=dataBase_Value+"'감자탕', '"+R.drawable.picture+"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1)";
-            else if(b.equals("덮밥"))  dataBase_Value=dataBase_Value+"'덮밥', '"+R.drawable.picture+"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
-            else if(b.equals("돈가스"))  dataBase_Value=dataBase_Value+"'돈가스&분식', '"+R.drawable.picture+"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1)";
-            else if(b.equals("도시락"))  dataBase_Value=dataBase_Value+"'도시락', '"+R.drawable.picture+"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
-            else if(b.equals("라면"))  dataBase_Value=dataBase_Value+"'라면', '"+R.drawable.picture+"', 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0)";
-            else if(b.equals("부대찌개"))  dataBase_Value=dataBase_Value+"'부대찌개', '"+R.drawable.picture+"', 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0)";
-            else if(b.equals("보쌈"))  dataBase_Value=dataBase_Value+"'보쌈', '"+R.drawable.picture+"', 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1)";
-            else if(b.equals("빵"))  dataBase_Value=dataBase_Value+"'빵', '"+R.drawable.picture+"', 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)";
-            else if(b.equals("생선구이"))  dataBase_Value=dataBase_Value+"'생선구이', '"+R.drawable.picture+"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
-            else if(b.equals("양꼬치"))  dataBase_Value=dataBase_Value+"'양꼬치', '"+R.drawable.picture+"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
-            else if(b.equals("양장피"))  dataBase_Value=dataBase_Value+"'양장피&중국집', '"+R.drawable.picture+"', 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0)";
-            else if(b.equals("오무라이스"))  dataBase_Value=dataBase_Value+"'오무라이스&분식', '"+R.drawable.picture+"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
-            else if(b.equals("제육볶음"))  dataBase_Value=dataBase_Value+"'제육&분식', '"+R.drawable.picture+"', 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1)";
-            else if(b.equals("죽"))  dataBase_Value=dataBase_Value+"'죽', '"+R.drawable.picture+"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
-            else if(b.equals("족발"))  dataBase_Value=dataBase_Value+"'족발', '"+R.drawable.picture+"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
-            else if(b.equals("찜닭"))  dataBase_Value=dataBase_Value+"'찜닭', '"+R.drawable.picture+"', 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1)";
-            else if(b.equals("짬뽕"))  dataBase_Value=dataBase_Value+"'짬뽕&중국집', '"+R.drawable.picture+"', 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0)";
-            else if(b.equals("자장면"))  dataBase_Value=dataBase_Value+"'자장면&중국집', '"+R.drawable.picture+"', 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0)";
-            else if(b.equals("치킨"))  dataBase_Value=dataBase_Value+"'치킨', '"+R.drawable.picture+"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1)";
-            else if(b.equals("카레"))  dataBase_Value=dataBase_Value+"'카레&분식', '"+R.drawable.picture+"', 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
-            else if(b.equals("탕수육"))  dataBase_Value=dataBase_Value+"'탕수육&중국집', '"+R.drawable.picture+"', 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1)";
-            else if(b.equals("회"))  dataBase_Value=dataBase_Value+"'회', '"+R.drawable.picture+"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
-            else if(b.equals("해장국"))  dataBase_Value=dataBase_Value+"'해장국', '"+R.drawable.picture+"', 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0)";
-            else if(b.equals("햄버거"))  dataBase_Value=dataBase_Value+"'햄버거', '"+R.drawable.picture+"', 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1)";
-            else if(b.equals("피자"))  dataBase_Value=dataBase_Value+"'피자', '"+R.drawable.picture+"', 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1)";
-            else if(b.equals("파스타"))  dataBase_Value=dataBase_Value+"'파스타', '"+R.drawable.picture+"', 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0)";
+            if(b.equals("김밥"))  dataBase_Value=dataBase_Value+"'김밥&분식', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)";
+            else if(b.equals("고기"))  dataBase_Value=dataBase_Value+"'고기', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
+            else if(b.equals("감자탕"))  dataBase_Value=dataBase_Value+"'감자탕', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1)";
+            else if(b.equals("덮밥"))  dataBase_Value=dataBase_Value+"'덮밥', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
+            else if(b.equals("돈가스"))  dataBase_Value=dataBase_Value+"'돈가스&분식', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1)";
+            else if(b.equals("도시락"))  dataBase_Value=dataBase_Value+"'도시락', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
+            else if(b.equals("라면"))  dataBase_Value=dataBase_Value+"'라면', '"+R.drawable.menu_unknown +"', 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0)";
+            else if(b.equals("부대찌개"))  dataBase_Value=dataBase_Value+"'부대찌개', '"+R.drawable.menu_unknown +"', 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0)";
+            else if(b.equals("보쌈"))  dataBase_Value=dataBase_Value+"'보쌈', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1)";
+            else if(b.equals("빵"))  dataBase_Value=dataBase_Value+"'빵', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)";
+            else if(b.equals("생선구이"))  dataBase_Value=dataBase_Value+"'생선구이', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
+            else if(b.equals("양꼬치"))  dataBase_Value=dataBase_Value+"'양꼬치', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
+            else if(b.equals("양장피"))  dataBase_Value=dataBase_Value+"'양장피&중국집', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0)";
+            else if(b.equals("오무라이스"))  dataBase_Value=dataBase_Value+"'오무라이스&분식', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
+            else if(b.equals("제육볶음"))  dataBase_Value=dataBase_Value+"'제육&분식', '"+R.drawable.menu_unknown +"', 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1)";
+            else if(b.equals("죽"))  dataBase_Value=dataBase_Value+"'죽', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
+            else if(b.equals("족발"))  dataBase_Value=dataBase_Value+"'족발', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
+            else if(b.equals("찜닭"))  dataBase_Value=dataBase_Value+"'찜닭', '"+R.drawable.menu_unknown +"', 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1)";
+            else if(b.equals("짬뽕"))  dataBase_Value=dataBase_Value+"'짬뽕&중국집', '"+R.drawable.menu_unknown +"', 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0)";
+            else if(b.equals("자장면"))  dataBase_Value=dataBase_Value+"'자장면&중국집', '"+R.drawable.menu_unknown +"', 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0)";
+            else if(b.equals("치킨"))  dataBase_Value=dataBase_Value+"'치킨', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1)";
+            else if(b.equals("카레"))  dataBase_Value=dataBase_Value+"'카레&분식', '"+R.drawable.menu_unknown +"', 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
+            else if(b.equals("탕수육"))  dataBase_Value=dataBase_Value+"'탕수육&중국집', '"+R.drawable.menu_unknown +"', 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1)";
+            else if(b.equals("회"))  dataBase_Value=dataBase_Value+"'회', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
+            else if(b.equals("해장국"))  dataBase_Value=dataBase_Value+"'해장국', '"+R.drawable.menu_unknown +"', 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0)";
+            else if(b.equals("햄버거"))  dataBase_Value=dataBase_Value+"'햄버거', '"+R.drawable.menu_unknown +"', 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1)";
+            else if(b.equals("피자"))  dataBase_Value=dataBase_Value+"'피자', '"+R.drawable.menu_unknown +"', 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1)";
+            else if(b.equals("파스타"))  dataBase_Value=dataBase_Value+"'파스타', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0)";
 
             database_menu.execSQL("INSERT INTO " + TABLE_NAME + dataBase_key2 + dataBase_Value);
         }
@@ -116,7 +123,6 @@ public class MenuDataBase {
              return new ArrayList[]{new ArrayList(menuName.subList(0,indexLength+1)), new ArrayList(menuUri.subList(0,indexLength+1))};
          }
 
-
          int samenum=0;
          int samerange=0;
          ArrayList<String> menuNameResult=new ArrayList<>();
@@ -134,7 +140,7 @@ public class MenuDataBase {
 
          for(int v=0;v<indexLength-samenum;v++){
              menuNameResult.add(menuName.get(v));
-             menuUriResult.add(menuNum.get(v));
+             menuUriResult.add(menuUri.get(v));
          }
 
          Random random=new Random();
@@ -142,7 +148,7 @@ public class MenuDataBase {
          for(int n=0;n<samenum;n++){
              int index=random.nextInt(range--);
              menuNameResult.add(menuName.remove(indexLength-samenum+index+1));
-             menuUriResult.add(menuNum.remove(indexLength-samenum+index+1));
+             menuUriResult.add(menuUri.remove(indexLength-samenum+index+1));
          }
 
          return new ArrayList[]{menuNameResult,menuUriResult};

@@ -1,7 +1,9 @@
 package com.factory.salmon.pickranmenu;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,7 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.google.android.material.checkbox.MaterialCheckBox;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,7 +27,9 @@ public class MenuPickFragment extends Fragment {
     ArrayList<String> menuName;
     ArrayList<Integer> menuUri;
     ArrayList<Integer> menuIndex=new ArrayList<>();
+    ArrayList<MaterialCheckBox> checkBoxArray=new ArrayList<>();
 
+    int pickMenu=-1;
 
     public MenuPickFragment(Bundle bundle){
         menuNumMaxResult=bundle.getIntArray("menuNumMaxResult");
@@ -77,8 +82,27 @@ public class MenuPickFragment extends Fragment {
 
                 int index=random.nextInt(menuNumResult[0]);
 
-                vh.menuName.setText(menuName.remove(index));
-                Picasso.get().load(menuUri.remove(index)).into(vh.menuImg);
+                vh.menuName.setText(menuName.get(index));
+                Glide.with(G.main).load(menuUri.get(index)).into(vh.menuImg);
+//                new AlertDialog.Builder(G.main).setMessage(menuName.get(index)+menuUri.get(index)).setPositiveButton("OK",null).create().show();
+//                Picasso.get().load(menuUri.get(index)).into(vh.menuImg);
+
+                if(index==pickMenu) vh.checkBox.setChecked(true);
+                else    vh.checkBox.setChecked(false);
+
+//                vh.checkBox.setOnTouchListener(new View.OnTouchListener() {
+//                    @Override public boolean onTouch(View v, MotionEvent event) {
+//                        MaterialCheckBox check=(MaterialCheckBox)v;
+//                        check.setChecked(!check.isChecked());
+//                        return true;
+//                    }
+//                });
+//                vh.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                    @Override public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { buttonView.setChecked(false); }
+//                });
+
+
+
 
 
             }
@@ -92,15 +116,45 @@ public class MenuPickFragment extends Fragment {
 
                 ImageView menuImg;
                 RegularTextView menuName;
+                MaterialCheckBox checkBox;
 
                 public ViewHolder(@NonNull View itemView) {
                     super(itemView);
                     menuImg=itemView.findViewById(R.id.MenuPick_item_img);
                     menuName=itemView.findViewById(R.id.MenuPick_item_name);
+                    checkBox=itemView.findViewById(R.id.MenuPick_item_check);
+                    checkBoxArray.add(checkBox);
+
+                    itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int index=getAdapterPosition();
+                            if(pickMenu!=-1)    checkBoxArray.get(pickMenu).setChecked(false);
+                            pickMenu=index;
+                            checkBox.setChecked(true);
+                        }
+                    });
+
                 }
+
+//                @Override
+//                public void onClick(View v) {
+//                    pickMenu=getAdapterPosition();
+//                    checkBoxArray.get(pickMenu).setChecked(false);
+//                    checkBox.setChecked(true);
+//                }
             }
 
         });
+
+//        recycler.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener(){
+//            @Override
+//            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+//
+//
+//                return true;
+//            }
+//        });
 
         return v;
 
