@@ -1,9 +1,7 @@
 package com.factory.salmon.pickranmenu;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -90,20 +88,6 @@ public class MenuPickFragment extends Fragment {
                 if(index==pickMenu) vh.checkBox.setChecked(true);
                 else    vh.checkBox.setChecked(false);
 
-//                vh.checkBox.setOnTouchListener(new View.OnTouchListener() {
-//                    @Override public boolean onTouch(View v, MotionEvent event) {
-//                        MaterialCheckBox check=(MaterialCheckBox)v;
-//                        check.setChecked(!check.isChecked());
-//                        return true;
-//                    }
-//                });
-//                vh.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { buttonView.setChecked(false); }
-//                });
-
-
-
-
 
             }
 
@@ -136,27 +120,15 @@ public class MenuPickFragment extends Fragment {
                     });
 
                 }
-
-//                @Override
-//                public void onClick(View v) {
-//                    pickMenu=getAdapterPosition();
-//                    checkBoxArray.get(pickMenu).setChecked(false);
-//                    checkBox.setChecked(true);
-//                }
             }
 
         });
 
-//        recycler.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener(){
-//            @Override
-//            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-//
-//
-//                return true;
-//            }
-//        });
-
         return v;
+
+    }
+
+    public void ClickSelectMenu(View v){
 
     }
 
