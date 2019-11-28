@@ -118,18 +118,14 @@ public class MenuDataBase {
         }
 
         if(menuRanking.size()<indexLength){
-            Cursor cursor=database_menu.rawQuery(select,new String[]{"null"});
-            while(cursor.moveToNext()) {
-                new AlertDialog.Builder(G.main).setMessage(cursor.getString(0)+" "+cursor.getInt(2)+" "+cursor.getInt(1)).setPositiveButton("OK",null).create().show();
+            Cursor cursor=database_menu.rawQuery(select.substring(0,select.length()-2)+" IS NULL",null);
+            while(cursor.moveToNext())
                 menuRanking.add(new MenuItem(cursor.getString(0), cursor.getInt(2), cursor.getInt(1)));
-            }
         }
 
-        StringBuffer buffer=new StringBuffer();
-        buffer.append("랭킹목록\n"+select+"\n");
-        for(MenuItem s : menuRanking)
-            buffer.append(s.name+" "+s.ranking+" "+s.pictureUri+"\n");
-        new AlertDialog.Builder(G.main).setMessage(buffer.toString()).setPositiveButton("OK",null).create().show();
+        if(menuRanking.size()>indexLength){
+            
+        }
 
 
 
