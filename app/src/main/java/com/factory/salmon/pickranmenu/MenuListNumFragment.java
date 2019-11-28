@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -25,8 +26,8 @@ public class MenuListNumFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v=inflater.inflate(R.layout.fragment_menu_list_recycler,container,false);
-
         recyclerView=v.findViewById(R.id.MenuList_recycler);
+        recyclerView.addItemDecoration(new DividerItemDecoration(G.main,DividerItemDecoration.VERTICAL));
 
         recyclerView.setAdapter(new RecyclerView.Adapter() {
             @NonNull
@@ -122,6 +123,10 @@ public class MenuListNumFragment extends Fragment {
         });
 
         return v;
+    }
+
+    public void ClickMenuListSample(View v){
+
     }
 
 

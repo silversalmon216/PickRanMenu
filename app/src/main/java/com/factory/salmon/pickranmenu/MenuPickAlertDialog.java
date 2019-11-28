@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class MenuPickAlertDialog {
 
         View v=G.main.getLayoutInflater().inflate(R.layout.dialog_pick_menu,null,false);
         recycler=v.findViewById(R.id.pickMenu_dialog_recycler);
+        recycler.addItemDecoration(new DividerItemDecoration(G.main,DividerItemDecoration.VERTICAL));
 
         recycler.setAdapter(new RecyclerView.Adapter() {
             @NonNull
@@ -121,6 +123,10 @@ public class MenuPickAlertDialog {
         });
         builder.create().show();
 
+
+    }
+
+    public void ClickMenuListSample(View v){
 
     }
 

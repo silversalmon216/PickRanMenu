@@ -27,6 +27,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="4dp"
         android:clickable="false"
+        android:visibility="invisible"
         />
 
 </RelativeLayout>

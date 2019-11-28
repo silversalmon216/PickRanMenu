@@ -9,6 +9,7 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 public class MenuListFavorFragment extends Fragment {
 
-    RecyclerView recyclerVIew;
+    RecyclerView recyclerView;
 
     ArrayList<String> favor=new ArrayList<>();
     Boolean[] favorOnOff;
@@ -27,13 +28,14 @@ public class MenuListFavorFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v=inflater.inflate(R.layout.fragment_menu_list_recycler, container,false);
-        recyclerVIew=v.findViewById(R.id.MenuList_recycler);
+        recyclerView=v.findViewById(R.id.MenuList_recycler);
+        recyclerView.addItemDecoration(new DividerItemDecoration(G.main,DividerItemDecoration.VERTICAL));
 
         favorOnOff=G.favorOnOff;
         for(String s : getResources().getStringArray(R.array.favor))
             favor.add(s);
 
-        recyclerVIew.setAdapter(new RecyclerView.Adapter() {
+        recyclerView.setAdapter(new RecyclerView.Adapter() {
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

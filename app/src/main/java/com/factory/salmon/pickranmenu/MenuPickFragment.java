@@ -33,7 +33,7 @@ public class MenuPickFragment extends Fragment {
         menuNumMaxResult=bundle.getIntArray("menuNumMaxResult");
         menuNumResult=bundle.getIntArray("menuNumResult");
 
-        ArrayList[] menu=G.main.menuDataBase.GetRankingList(menuNumMaxResult[0]);
+        ArrayList[] menu=G.main.menuDataBase.GetRankingList(menuNumMaxResult[0],5);
         menuName=menu[0];
         menuUri=menu[1];
 
@@ -113,9 +113,13 @@ public class MenuPickFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             int index=getAdapterPosition();
-                            if(pickMenu!=-1)    checkBoxArray.get(pickMenu).setChecked(false);
+                            if(pickMenu!=-1){
+                                checkBoxArray.get(pickMenu).setChecked(false);
+                                checkBoxArray.get(pickMenu).setVisibility(View.INVISIBLE);
+                            }
                             pickMenu=index;
                             checkBox.setChecked(true);
+                            checkBox.setVisibility(View.VISIBLE);
                         }
                     });
 

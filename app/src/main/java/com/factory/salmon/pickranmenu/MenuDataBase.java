@@ -32,8 +32,8 @@ public class MenuDataBase {
     }
 
     public void InsertMenu(){
-        String dataBase_key1="(menuName text not null, menuNum ubteger, OnOff integer, searchKeyword text, pictureUri integer not null";
-        String dataBase_key2="(menuName, menuNum, OnOff, searchKeyword, pictureUri";
+        String dataBase_key1="(menuName text not null, menuNum integer, menuNumRanking integer, menuRecentRanking integer, OnOff integer, searchKeyword text, pictureUri integer not null";
+        String dataBase_key2="(menuName, menuNum, menuNumRanking, menuRecentRanking, OnOff, searchKeyword, pictureUri";
         for(String a : context.getResources().getStringArray(R.array.favor)){
             dataBase_key1=dataBase_key1+", "+a+" integer";
             dataBase_key2=dataBase_key2+", "+a;
@@ -45,7 +45,7 @@ public class MenuDataBase {
 
         for(String b : context.getResources().getStringArray(R.array.menu)){
 
-            String dataBase_Value=" VALUES('" + b + "',0,1,";
+            String dataBase_Value=" VALUES('" + b + "', 0, null, null, 1,";
 
             if(b.equals("김밥"))  dataBase_Value=dataBase_Value+"'김밥&분식', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)";
             else if(b.equals("고기"))  dataBase_Value=dataBase_Value+"'고기', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
@@ -95,13 +95,48 @@ public class MenuDataBase {
         int isOn= isMakeOn ? 1 : 0;
 
         database_menu.execSQL("UPDATE "+TABLE_NAME + " SET OnOff=" + isOn + " WHERE menuName=?",new String[]{menu});
-
-        Cursor c=database_menu.rawQuery("SELECT OnOff FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
-        c.moveToFirst();
-//        new AlertDialog.Builder(context).setMessage(menu+" : "+c.getInt(0)).setPositiveButton("OK",null).create().show();
     }
 
-    public ArrayList[] GetRankingList(int indexLength){
+    public ArrayList[] GetRankingList(int index, int indexLength){
+
+        ArrayList<MenuItem> menuRanking=new ArrayList<>();
+        String select="";
+        switch(index){
+            case 1:
+                select="SELECT menuName, menuNumRanking, pictureUri FROM " + TABLE_NAME + " WHERE menuNumRanking=?";
+                break;
+            case 2:
+                select="SELECT menuName, menuRecentRanking, pictureUri FROM " + TABLE_NAME + " WHERE menuRecentRanking=?";
+                break;
+        }
+
+        for(int i=1;i<11;i++){
+            Cursor cursor=database_menu.rawQuery(select,new String[]{i+""});
+            while(cursor.moveToNext())
+                menuRanking.add(new MenuItem(cursor.getString(0),cursor.getInt(2),cursor.getInt(1)));
+            if(menuRanking.size()>=indexLength) break;
+        }
+
+        if(menuRanking.size()<indexLength){
+            Cursor cursor=database_menu.rawQuery(select,new String[]{"null"});
+            while(cursor.moveToNext()) {
+                new AlertDialog.Builder(G.main).setMessage(cursor.getString(0)+" "+cursor.getInt(2)+" "+cursor.getInt(1)).setPositiveButton("OK",null).create().show();
+                menuRanking.add(new MenuItem(cursor.getString(0), cursor.getInt(2), cursor.getInt(1)));
+            }
+        }
+
+        StringBuffer buffer=new StringBuffer();
+        buffer.append("랭킹목록\n"+select+"\n");
+        for(MenuItem s : menuRanking)
+            buffer.append(s.name+" "+s.ranking+" "+s.pictureUri+"\n");
+        new AlertDialog.Builder(G.main).setMessage(buffer.toString()).setPositiveButton("OK",null).create().show();
+
+
+
+        return null;
+    }
+
+    /*public ArrayList[] GetRankingList(int indexLength){
         Cursor cursor=database_menu.rawQuery("SELECT menuName, MenuNum, pictureUri FROM " + TABLE_NAME,null);
 
         ArrayList<Integer> menuNum=new ArrayList<>();
@@ -152,7 +187,7 @@ public class MenuDataBase {
          }
 
          return new ArrayList[]{menuNameResult,menuUriResult};
-    }
+    }*/
 
     public void SwitchFavor(String favor, boolean isMakeOn){
         Cursor cursor=database_menu.rawQuery("SELECT menuName, OnOff FROM " + TABLE_NAME + " WHERE " + favor + "=?",new String[]{"1"});
