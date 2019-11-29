@@ -17,13 +17,14 @@
         />
 
     <Button
+        android:id="@+id/MenuPick.btnClickSelectMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="이 메뉴를 선택"
-        android:onClick="ClickSelectMenu"
         />
 
     <Button
+        android:id="@+id/MenuPick.btnClickRandomMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="랜덤으로 정하기"

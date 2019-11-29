@@ -46,11 +46,11 @@
 
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/MenuList_Num.item_btnShowList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="목록 미리보기"
-        android:onClick="ClickMenuListSample"
         />
 
 </LinearLayout>

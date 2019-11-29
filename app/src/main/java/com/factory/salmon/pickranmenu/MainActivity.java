@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         FragmentChange(1,null);
-        menuDataBase.GetRankingList(1,7);
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class MenuDataBase {
@@ -45,7 +46,7 @@ public class MenuDataBase {
 
         for(String b : context.getResources().getStringArray(R.array.menu)){
 
-            String dataBase_Value=" VALUES('" + b + "', 0, null, null, 1,";
+            String dataBase_Value=" VALUES('" + b + "', 0, 11, 11, 1,";
 
             if(b.equals("김밥"))  dataBase_Value=dataBase_Value+"'김밥&분식', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)";
             else if(b.equals("고기"))  dataBase_Value=dataBase_Value+"'고기', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
@@ -82,13 +83,26 @@ public class MenuDataBase {
     }
 
     public void SelectMenu(String menu){
-        Cursor cursor=database_menu.rawQuery("SELECT menuNum FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
+        Cursor cursor=database_menu.rawQuery("SELECT menuNum, menuNumRanking, menuRecentRanking FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
         cursor.moveToFirst();
         database_menu.execSQL("UPDATE " + TABLE_NAME + " SET menuNum=" + (cursor.getInt(0)+1) + " WHERE menuName=?",new String[]{menu});
 
-        Cursor c=database_menu.rawQuery("SELECT menuNum FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
-        c.moveToFirst();
-        new AlertDialog.Builder(context).setMessage(menu+" : "+c.getInt(0)).setPositiveButton("OK",null).create().show();
+        if(cursor.getInt(1)!=1) {
+            Cursor cursor1 = database_menu.rawQuery("SELECT menuName, menuNum FROM " + TABLE_NAME + " WHERE menuNumRanking=?", new String[]{ cursor.getInt(1)+"" });
+
+            if (cursor1.moveToFirst()) {
+                while(true){
+                    database_menu.execSQL("UPDATE " +TABLE_NAME + " SET menuNumRanking=" + cursor.getInt(1) + " WHERE menuName=?",new String[]{cursor1.getString(0)});
+                }
+            } else
+                database_menu.execSQL("UPDATE " + TABLE_NAME + " SET menuNumRanking=" + (cursor.getInt(1) - 1) + " WHERE menuName=?", new String[]{menu});
+        }
+
+
+
+//        Cursor c=database_menu.rawQuery("SELECT menuNum FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
+//        c.moveToFirst();
+//        new AlertDialog.Builder(context).setMessage(menu+" : "+c.getInt(0)).setPositiveButton("OK",null).create().show();
     }
 
     public void SwitchMenu(String menu, boolean isMakeOn){
@@ -97,15 +111,15 @@ public class MenuDataBase {
         database_menu.execSQL("UPDATE "+TABLE_NAME + " SET OnOff=" + isOn + " WHERE menuName=?",new String[]{menu});
     }
 
-    public ArrayList[] GetRankingList(int index, int indexLength){
+    public ArrayList<MenuItem> GetRankingList(int index, int indexLength){
 
         ArrayList<MenuItem> menuRanking=new ArrayList<>();
         String select="";
         switch(index){
-            case 1:
+            case 0:
                 select="SELECT menuName, menuNumRanking, pictureUri FROM " + TABLE_NAME + " WHERE menuNumRanking=?";
                 break;
-            case 2:
+            case 1:
                 select="SELECT menuName, menuRecentRanking, pictureUri FROM " + TABLE_NAME + " WHERE menuRecentRanking=?";
                 break;
         }
@@ -120,16 +134,23 @@ public class MenuDataBase {
         if(menuRanking.size()<indexLength){
             Cursor cursor=database_menu.rawQuery(select.substring(0,select.length()-2)+" IS NULL",null);
             while(cursor.moveToNext())
-                menuRanking.add(new MenuItem(cursor.getString(0), cursor.getInt(2), cursor.getInt(1)));
+                menuRanking.add(new MenuItem(cursor.getString(0), cursor.getInt(2), 11));
         }
 
         if(menuRanking.size()>indexLength){
-            
+            ArrayList<MenuItem> menuSecondRanking=new ArrayList<>();
+
+            while(menuRanking.get(0).ranking!=menuRanking.get(menuRanking.size()-1).ranking)
+                menuSecondRanking.add(menuRanking.remove(0));
+
+            Collections.shuffle(menuRanking);
+            menuSecondRanking.addAll(menuRanking.subList(0,indexLength-menuSecondRanking.size()));
+
+            menuRanking=menuSecondRanking;
+
         }
 
-
-
-        return null;
+        return menuRanking;
     }
 
     /*public ArrayList[] GetRankingList(int indexLength){

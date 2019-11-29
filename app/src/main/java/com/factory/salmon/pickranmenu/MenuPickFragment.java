@@ -15,16 +15,17 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.checkbox.MaterialCheckBox;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Collections;
 
 public class MenuPickFragment extends Fragment {
 
     RecyclerView recycler;
     int[] menuNumMaxResult;
     int[] menuNumResult;
-    ArrayList<String> menuName;
-    ArrayList<Integer> menuUri;
-    ArrayList<Integer> menuIndex=new ArrayList<>();
+//    ArrayList<String> menuName;
+//    ArrayList<Integer> menuUri;
+//    ArrayList<Integer> menuIndex=new ArrayList<>();
+    ArrayList<MenuItem> menu=new ArrayList<>();
     ArrayList<MaterialCheckBox> checkBoxArray=new ArrayList<>();
 
     int pickMenu=-1;
@@ -33,25 +34,27 @@ public class MenuPickFragment extends Fragment {
         menuNumMaxResult=bundle.getIntArray("menuNumMaxResult");
         menuNumResult=bundle.getIntArray("menuNumResult");
 
-        ArrayList[] menu=G.main.menuDataBase.GetRankingList(menuNumMaxResult[0],5);
-        menuName=menu[0];
-        menuUri=menu[1];
-
-        Random random=new Random();
-        for(int i=menuNumResult[0];i>0;i--){
-            int index=random.nextInt(menuNumMaxResult[0]);
-
-            boolean isSame=false;
-            for(int num : menuIndex){
-                if(num==index){
-                    isSame=true;
-                    break;
-                }
-            }
-            if(isSame){ i++;    continue; }
-            menuIndex.add(index);
-
+        for(int i=0;i<2;i++) {
+            ArrayList<MenuItem> list = G.main.menuDataBase.GetRankingList(i, menuNumMaxResult[i]);
+            Collections.shuffle(list);
+            menu.addAll(list.subList(0, menuNumResult[i]));
         }
+        Collections.shuffle(menu);
+
+//        Random random=new Random();
+//        for(int i=menuNumResult[0];i>0;i--){
+//            int index=random.nextInt(menuNumMaxResult[0]);
+//
+//            boolean isSame=false;
+//            for(int num : menuIndex){
+//                if(num==index){
+//                    isSame=true;
+//                    break;
+//                }
+//            }
+//            if(isSame){ i++;    continue; }
+//            menuIndex.add(index);
+//        }
 
     }
 
@@ -76,16 +79,13 @@ public class MenuPickFragment extends Fragment {
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
                 ViewHolder vh=(ViewHolder)holder;
-                Random random=new Random();
 
-                int index=random.nextInt(menuNumResult[0]);
-
-                vh.menuName.setText(menuName.get(index));
-                Glide.with(G.main).load(menuUri.get(index)).into(vh.menuImg);
+                vh.menuName.setText(menu.get(position).name);
+                Glide.with(G.main).load(menu.get(position).pictureUri).into(vh.menuImg);
 //                new AlertDialog.Builder(G.main).setMessage(menuName.get(index)+menuUri.get(index)).setPositiveButton("OK",null).create().show();
 //                Picasso.get().load(menuUri.get(index)).into(vh.menuImg);
 
-                if(index==pickMenu) vh.checkBox.setChecked(true);
+                if(position==pickMenu) vh.checkBox.setChecked(true);
                 else    vh.checkBox.setChecked(false);
 
 
@@ -93,7 +93,7 @@ public class MenuPickFragment extends Fragment {
 
             @Override
             public int getItemCount() {
-                return menuNumResult[0];
+                return menuNumResult[0]+menuNumResult[1];
             }
 
             class ViewHolder extends RecyclerView.ViewHolder{
@@ -128,14 +128,25 @@ public class MenuPickFragment extends Fragment {
 
         });
 
+
+        v.findViewById(R.id.MenuPick_btnClickSelectMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pickMenu==-1)    return;
+                G.main.menuDataBase.SelectMenu(menu.get(pickMenu).name);
+            }
+        });
+
+        v.findViewById(R.id.MenuPick_btnClickRandomMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return v;
 
     }
-
-    public void ClickSelectMenu(View v){
-
-    }
-
 
 }
 

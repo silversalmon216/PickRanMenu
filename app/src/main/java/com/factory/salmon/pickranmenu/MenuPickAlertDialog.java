@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
+
 import java.util.ArrayList;
 
 public class MenuPickAlertDialog {
@@ -84,6 +86,18 @@ public class MenuPickAlertDialog {
                     @Override public void onNothingSelected(AdapterView<?> adapterView) { }
                 });
 
+                vh.btnShowList.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ArrayList<MenuItem> menuList=G.main.menuDataBase.GetRankingList(position,vh.spinnerMenuNumMax.getSelectedItemPosition());
+                        StringBuffer buffer=new StringBuffer();
+                        buffer.append("다음 목록중에서 "+vh.spinnerMenuNum.getSelectedItem()+"가 선택됩니다.\n");
+                        for(MenuItem menu : menuList)
+                            buffer.append(menu.name+"\n");
+                        new AlertDialog.Builder(G.main).setMessage(buffer.toString()).setPositiveButton("확인",null).create().show();
+                    }
+                });
+
             }
 
             @Override
@@ -96,6 +110,7 @@ public class MenuPickAlertDialog {
                 TextView txtMenuNum;
                 Spinner spinnerMenuNumMax;
                 Spinner spinnerMenuNum;
+                MaterialButton btnShowList;
 
                 public ViewHolder(@NonNull View itemView) {
                     super(itemView);
@@ -103,6 +118,7 @@ public class MenuPickAlertDialog {
                     txtMenuNum=itemView.findViewById(R.id.MenuList_Num_item_txt);
                     spinnerMenuNumMax=itemView.findViewById(R.id.MenuList_Num_item_spinnerMax);
                     spinnerMenuNum=itemView.findViewById(R.id.MenuList_Num_item_spinnerNum);
+                    btnShowList=itemView.findViewById(R.id.MenuList_Num_item_btnShowList);
 
                 }
             }
@@ -112,7 +128,7 @@ public class MenuPickAlertDialog {
 
 
         AlertDialog.Builder builder=new AlertDialog.Builder(G.main).setView(v);
-        builder.setNegativeButton("CANCEL",null).setNeutralButton("OK", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton("CANCEL",null).setNegativeButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Bundle bundle=new Bundle();
@@ -123,10 +139,6 @@ public class MenuPickAlertDialog {
         });
         builder.create().show();
 
-
-    }
-
-    public void ClickMenuListSample(View v){
 
     }
 
