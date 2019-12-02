@@ -142,6 +142,16 @@ public class MenuPickFragment extends Fragment {
         v.findViewById(R.id.MenuPick_btnClickRandomMenu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                ArrayList<String> menuNameList=new ArrayList<>();
+                for(MenuItem m : menu)
+                    menuNameList.add(m.name);
+                bundle.putStringArrayList("menuNameList",menuNameList);
+                ArrayList<Integer> menuUriList=new ArrayList<>();
+                for(MenuItem m : menu)
+                    menuUriList.add(m.pictureUri);
+                bundle.putIntegerArrayList("menuUriList",menuUriList);
+                G.main.FragmentChange(4,bundle);
 
             }
         });

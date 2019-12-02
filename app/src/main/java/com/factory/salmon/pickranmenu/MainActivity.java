@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 4:
+                currentFragment=new MenuCheckFragment(bundle);
                 break;
 
             case 5:
