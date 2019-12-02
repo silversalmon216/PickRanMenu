@@ -1,6 +1,5 @@
 package com.factory.salmon.pickranmenu;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -47,34 +46,38 @@ public class MenuDataBase {
 
             String dataBase_Value=" VALUES('" + b + "', 0, 11, 11, 1,";
 
-            if(b.equals("김밥"))  dataBase_Value=dataBase_Value+"'김밥&분식', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)";
-            else if(b.equals("고기"))  dataBase_Value=dataBase_Value+"'고기', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
+            if(b.equals("김밥"))  dataBase_Value=dataBase_Value+"'김밥&분식', '"+R.drawable.menu_kimbab +"', 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)";
+            else if(b.equals("고기"))  dataBase_Value=dataBase_Value+"'고기', '"+R.drawable.menu_meat +"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
             else if(b.equals("감자탕"))  dataBase_Value=dataBase_Value+"'감자탕', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1)";
             else if(b.equals("덮밥"))  dataBase_Value=dataBase_Value+"'덮밥', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
             else if(b.equals("돈가스"))  dataBase_Value=dataBase_Value+"'돈가스&분식', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1)";
-            else if(b.equals("도시락"))  dataBase_Value=dataBase_Value+"'도시락', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
-            else if(b.equals("라면"))  dataBase_Value=dataBase_Value+"'라면', '"+R.drawable.menu_unknown +"', 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0)";
+            else if(b.equals("도시락"))  dataBase_Value=dataBase_Value+"'도시락', '"+R.drawable.menu_dongas +"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
+            else if(b.equals("라면"))  dataBase_Value=dataBase_Value+"'라면', '"+R.drawable.menu_ramyun +"', 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0)";
             else if(b.equals("부대찌개"))  dataBase_Value=dataBase_Value+"'부대찌개', '"+R.drawable.menu_unknown +"', 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0)";
-            else if(b.equals("보쌈"))  dataBase_Value=dataBase_Value+"'보쌈', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1)";
+            else if(b.equals("보쌈"))  dataBase_Value=dataBase_Value+"'보쌈', '"+R.drawable.menu_suyuk +"', 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1)";
             else if(b.equals("빵"))  dataBase_Value=dataBase_Value+"'빵', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)";
             else if(b.equals("생선구이"))  dataBase_Value=dataBase_Value+"'생선구이', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
             else if(b.equals("양꼬치"))  dataBase_Value=dataBase_Value+"'양꼬치', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
             else if(b.equals("양장피"))  dataBase_Value=dataBase_Value+"'양장피&중국집', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0)";
-            else if(b.equals("오무라이스"))  dataBase_Value=dataBase_Value+"'오무라이스&분식', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
+            else if(b.equals("오무라이스"))  dataBase_Value=dataBase_Value+"'오무라이스&분식', '"+R.drawable.menu_omurice +"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
             else if(b.equals("제육볶음"))  dataBase_Value=dataBase_Value+"'제육&분식', '"+R.drawable.menu_unknown +"', 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1)";
             else if(b.equals("죽"))  dataBase_Value=dataBase_Value+"'죽', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
             else if(b.equals("족발"))  dataBase_Value=dataBase_Value+"'족발', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
             else if(b.equals("찜닭"))  dataBase_Value=dataBase_Value+"'찜닭', '"+R.drawable.menu_unknown +"', 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1)";
-            else if(b.equals("짬뽕"))  dataBase_Value=dataBase_Value+"'짬뽕&중국집', '"+R.drawable.menu_unknown +"', 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0)";
-            else if(b.equals("자장면"))  dataBase_Value=dataBase_Value+"'자장면&중국집', '"+R.drawable.menu_unknown +"', 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0)";
+            else if(b.equals("짬뽕"))  dataBase_Value=dataBase_Value+"'짬뽕&중국집', '"+R.drawable.menu_jjambbong +"', 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0)";
+            else if(b.equals("자장면"))  dataBase_Value=dataBase_Value+"'자장면&중국집', '"+R.drawable.menu_jjajang_noodle +"', 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0)";
             else if(b.equals("치킨"))  dataBase_Value=dataBase_Value+"'치킨', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1)";
             else if(b.equals("카레"))  dataBase_Value=dataBase_Value+"'카레&분식', '"+R.drawable.menu_unknown +"', 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)";
             else if(b.equals("탕수육"))  dataBase_Value=dataBase_Value+"'탕수육&중국집', '"+R.drawable.menu_unknown +"', 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1)";
-            else if(b.equals("회"))  dataBase_Value=dataBase_Value+"'회', '"+R.drawable.menu_unknown +"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
-            else if(b.equals("해장국"))  dataBase_Value=dataBase_Value+"'해장국', '"+R.drawable.menu_unknown +"', 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0)";
+            else if(b.equals("회"))  dataBase_Value=dataBase_Value+"'회', '"+R.drawable.menu_raw_salmon +"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)";
+            else if(b.equals("해장국"))  dataBase_Value=dataBase_Value+"'해장국', '"+R.drawable.menu_haejangguk +"', 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0)";
             else if(b.equals("햄버거"))  dataBase_Value=dataBase_Value+"'햄버거', '"+R.drawable.menu_unknown +"', 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1)";
             else if(b.equals("피자"))  dataBase_Value=dataBase_Value+"'피자', '"+R.drawable.menu_unknown +"', 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1)";
             else if(b.equals("파스타"))  dataBase_Value=dataBase_Value+"'파스타', '"+R.drawable.menu_unknown +"', 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0)";
+            else if(b.equals("꽃게"))  dataBase_Value=dataBase_Value+"'꽃게', '"+R.drawable.menu_crab +"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
+            else if(b.equals("잔치국수"))  dataBase_Value=dataBase_Value+"'잔치국수', '"+R.drawable.menu_janchi_noodle +"', 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)";
+            else if(b.equals("순두부찌개"))  dataBase_Value=dataBase_Value+"'순두부찌개', '"+R.drawable.menu_crab +"', 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)";
+//            else if(b.equals(""))  dataBase_Value=dataBase_Value+"'', '"+R.drawable.menu_crab +"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
 
             database_menu.execSQL("INSERT INTO " + TABLE_NAME + dataBase_key2 + dataBase_Value);
         }
@@ -87,21 +90,35 @@ public class MenuDataBase {
         database_menu.execSQL("UPDATE " + TABLE_NAME + " SET menuNum=" + (cursor.getInt(0)+1) + " WHERE menuName=?",new String[]{menu});
 
         if(cursor.getInt(1)!=1) {
-            Cursor cursor1 = database_menu.rawQuery("SELECT menuName, menuNum FROM " + TABLE_NAME + " WHERE menuNumRanking=?", new String[]{ cursor.getInt(1)+"" });
+            Cursor cursor1 = database_menu.rawQuery("SELECT menuName FROM " + TABLE_NAME + " WHERE menuName!=? AND menuNumRanking=? AND menuNum=?", new String[]{ menu, (cursor.getInt(1)-1)+"", (cursor.getInt(0)+1)+"" });
+            Cursor cursor2 = database_menu.rawQuery("SELECT menuName FROM " + TABLE_NAME + " WHERE menuName!=? AND menuNumRanking=? AND menuNum=?", new String[]{ menu, cursor.getInt(1)+"", cursor.getInt(0)+"" });
+            Cursor cursor3=database_menu.rawQuery("SELECT menuName, menuNumRanking FROM " + TABLE_NAME + " WHERE menuName!=? AND menuNumRanking<11 AND menuNumRanking>=?",new String[]{ menu, cursor.getInt(1)+"" });
 
-            if (cursor1.moveToFirst()) {
-                while(true){
-                    database_menu.execSQL("UPDATE " +TABLE_NAME + " SET menuNumRanking=" + cursor.getInt(1) + " WHERE menuName=?",new String[]{cursor1.getString(0)});
-                }
-            } else
+            if(cursor1.moveToFirst() || cursor2.moveToFirst()) {
+                if (!cursor1.moveToFirst() && cursor2.moveToFirst())
+                    while (cursor3.moveToNext())
+                        database_menu.execSQL("UPDATE " + TABLE_NAME + " SET menuNumRanking=" + (cursor3.getInt(1) + 1) + " WHERE menuName=?", new String[]{cursor3.getString(0)});
+                else if (cursor1.moveToFirst() && !cursor2.moveToFirst())
+                    while (cursor3.moveToNext())
+                        database_menu.execSQL("UPDATE " + TABLE_NAME + " SET menuNumRanking=" + (cursor3.getInt(1) - 1) + " WHERE menuName=?", new String[]{cursor3.getString(0)});
+
                 database_menu.execSQL("UPDATE " + TABLE_NAME + " SET menuNumRanking=" + (cursor.getInt(1) - 1) + " WHERE menuName=?", new String[]{menu});
+            }
         }
 
+        if(cursor.getInt(2)!=1){
+            Cursor cursor1=database_menu.rawQuery("SELECT menuName, menuRecentRanking FROM " + TABLE_NAME + " WHERE menuRecentRanking<?",new String[]{ cursor.getInt(2)+"" });
+            while(cursor1.moveToNext())
+                database_menu.execSQL("UPDATE " + TABLE_NAME + " SET menuRecentRanking=" + (cursor1.getInt(1)+1) + " WHERE menuName=?",new String[]{ cursor1.getString(0) });
+            database_menu.execSQL("UPDATE " + TABLE_NAME + " SET menuRecentRanking=1 WHERE menuName=?",new String[]{ menu });
+        }
 
+//        Cursor cursor1=database_menu.rawQuery("SELECT menuName, menuNum, menuNumRanking, menuRecentRanking FROM " +TABLE_NAME,null);
+//        String str="";
+//        while(cursor1.moveToNext())
+//            str+=cursor1.getString(0) + " " + cursor1.getInt(1) + " - " + cursor1.getInt(2) + " " + cursor1.getInt(3) + "\n";
+//        new AlertDialog.Builder(G.main).setMessage(str).setPositiveButton("OK",null).create().show();
 
-//        Cursor c=database_menu.rawQuery("SELECT menuNum FROM " + TABLE_NAME + " WHERE menuName=?",new String[]{menu});
-//        c.moveToFirst();
-//        new AlertDialog.Builder(context).setMessage(menu+" : "+c.getInt(0)).setPositiveButton("OK",null).create().show();
     }
 
     public void SwitchMenu(String menu, boolean isMakeOn){
@@ -131,7 +148,7 @@ public class MenuDataBase {
         }
 
         if(menuRanking.size()<indexLength){
-            Cursor cursor=database_menu.rawQuery(select.substring(0,select.length()-2)+" IS NULL",null);
+            Cursor cursor=database_menu.rawQuery(select,new String[]{ "11" });
             while(cursor.moveToNext())
                 menuRanking.add(new MenuItem(cursor.getString(0), cursor.getInt(2), 11));
         }

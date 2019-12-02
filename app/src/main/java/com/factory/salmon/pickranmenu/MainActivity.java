@@ -146,6 +146,13 @@ public class MainActivity extends AppCompatActivity {
                 currentFragment=new MenuPickFragment(bundle);
                 break;
 
+            case 4:
+                break;
+
+            case 5:
+                currentFragment=new MenuSelectFragment(bundle);
+                break;
+
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.Main_frame,currentFragment).commit();

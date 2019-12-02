@@ -31,8 +31,8 @@ public class MenuPickFragment extends Fragment {
     int pickMenu=-1;
 
     public MenuPickFragment(Bundle bundle){
-        menuNumMaxResult=bundle.getIntArray("menuNumMaxResult");
-        menuNumResult=bundle.getIntArray("menuNumResult");
+        menuNumMaxResult=bundle.getIntArray("MenuNumMaxResult");
+        menuNumResult=bundle.getIntArray("MenuNumResult");
 
         for(int i=0;i<2;i++) {
             ArrayList<MenuItem> list = G.main.menuDataBase.GetRankingList(i, menuNumMaxResult[i]);
@@ -134,6 +134,10 @@ public class MenuPickFragment extends Fragment {
             public void onClick(View v) {
                 if(pickMenu==-1)    return;
                 G.main.menuDataBase.SelectMenu(menu.get(pickMenu).name);
+                Bundle bundle=new Bundle();
+                bundle.putInt("MenuPictureUri",menu.get(pickMenu).pictureUri);
+                bundle.putString("MenuName",menu.get(pickMenu).name);
+                G.main.FragmentChange(5,bundle);
             }
         });
 

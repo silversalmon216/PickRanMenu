@@ -132,8 +132,8 @@ public class MenuPickAlertDialog {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Bundle bundle=new Bundle();
-                bundle.putIntArray("menuNumMaxResult",menuNumMaxResult);
-                bundle.putIntArray("menuNumResult",menuNumResult);
+                bundle.putIntArray("MenuNumMaxResult",menuNumMaxResult);
+                bundle.putIntArray("MenuNumResult",menuNumResult);
                 G.main.FragmentChange(3,bundle);
             }
         });

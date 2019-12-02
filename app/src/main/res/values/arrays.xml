@@ -30,6 +30,9 @@
         <item>햄버거</item>
         <item>피자</item>
         <item>파스타</item>
+        <item>꽃게</item>
+        <item>잔치국수</item>
+        <item>순두부찌개</item>
     </string-array>
 
     <string-array name="favor">
