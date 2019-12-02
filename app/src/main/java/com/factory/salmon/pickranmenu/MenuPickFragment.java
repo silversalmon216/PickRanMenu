@@ -82,8 +82,6 @@ public class MenuPickFragment extends Fragment {
 
                 vh.menuName.setText(menu.get(position).name);
                 Glide.with(G.main).load(menu.get(position).pictureUri).into(vh.menuImg);
-//                new AlertDialog.Builder(G.main).setMessage(menuName.get(index)+menuUri.get(index)).setPositiveButton("OK",null).create().show();
-//                Picasso.get().load(menuUri.get(index)).into(vh.menuImg);
 
                 if(position==pickMenu) vh.checkBox.setChecked(true);
                 else    vh.checkBox.setChecked(false);

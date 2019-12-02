@@ -124,9 +124,6 @@ public class MenuPickAlertDialog {
             }
         });
 
-
-
-
         AlertDialog.Builder builder=new AlertDialog.Builder(G.main).setView(v);
         builder.setNeutralButton("CANCEL",null).setNegativeButton("OK", new DialogInterface.OnClickListener() {
             @Override
