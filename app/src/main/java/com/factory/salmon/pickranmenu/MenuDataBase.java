@@ -21,13 +21,6 @@ public class MenuDataBase {
         this.context=context;
         database_menu=context.openOrCreateDatabase(DB_NAME,Context.MODE_PRIVATE,null);
 
-
-//        Cursor cur=database_menu.rawQuery("SELECT menuName,pictureUri FROM " + TABLE_NAME,null);
-//        cur.moveToFirst();
-//        while(cur.moveToNext()) {
-//            new AlertDialog.Builder(G.main).setMessage(cur.getString(0)+" - "+cur.getInt(0)).setPositiveButton("OK",null).create().show();
-//        }
-
     }
 
     public void InsertMenu(){
@@ -113,12 +106,6 @@ public class MenuDataBase {
             database_menu.execSQL("UPDATE " + TABLE_NAME + " SET menuRecentRanking=1 WHERE menuName=?",new String[]{ menu });
         }
 
-//        Cursor cursor1=database_menu.rawQuery("SELECT menuName, menuNum, menuNumRanking, menuRecentRanking FROM " +TABLE_NAME,null);
-//        String str="";
-//        while(cursor1.moveToNext())
-//            str+=cursor1.getString(0) + " " + cursor1.getInt(1) + " - " + cursor1.getInt(2) + " " + cursor1.getInt(3) + "\n";
-//        new AlertDialog.Builder(G.main).setMessage(str).setPositiveButton("OK",null).create().show();
-
     }
 
     public void SwitchMenu(String menu, boolean isMakeOn){
@@ -199,59 +186,6 @@ public class MenuDataBase {
 
         return menuRanking;
     }
-
-    /*public ArrayList[] GetRankingList(int indexLength){
-        Cursor cursor=database_menu.rawQuery("SELECT menuName, MenuNum, pictureUri FROM " + TABLE_NAME,null);
-
-        ArrayList<Integer> menuNum=new ArrayList<>();
-        ArrayList<String> menuName=new ArrayList<>();
-        ArrayList<Integer> menuUri=new ArrayList<>();
-
-        while(cursor.moveToNext()){
-            int i=0;
-            for(;i<menuNum.size();i++){
-                if(cursor.getInt(1)<menuNum.get(i))
-                    break;
-            }
-            menuName.add(i,cursor.getString(0));
-            menuNum.add(i,cursor.getInt(1));
-            menuUri.add(i,cursor.getInt(2));
-        }
-
-         if(menuNum.get(indexLength)!=menuNum.get(indexLength+1)) {
-             return new ArrayList[]{new ArrayList(menuName.subList(0,indexLength+1)), new ArrayList(menuUri.subList(0,indexLength+1))};
-         }
-
-         int samenum=0;
-         int samerange=0;
-         ArrayList<String> menuNameResult=new ArrayList<>();
-         ArrayList<Integer> menuUriResult=new ArrayList<>();
-
-         for(int j=indexLength;j>=0;j--){
-             if(menuNum.get(j)!=menuNum.get(indexLength))   break;
-             samenum++;
-         }
-
-         while(menuNum.get(indexLength)==menuNum.get(indexLength+samerange)){
-             samerange++;
-             if(indexLength+samerange+1>=menuNum.size())    break;
-         }
-
-         for(int v=0;v<indexLength-samenum;v++){
-             menuNameResult.add(menuName.get(v));
-             menuUriResult.add(menuUri.get(v));
-         }
-
-         Random random=new Random();
-         int range=samenum+samerange;
-         for(int n=0;n<samenum;n++){
-             int index=random.nextInt(range--);
-             menuNameResult.add(menuName.remove(indexLength-samenum+index+1));
-             menuUriResult.add(menuUri.remove(indexLength-samenum+index+1));
-         }
-
-         return new ArrayList[]{menuNameResult,menuUriResult};
-    }*/
 
     public void SwitchFavor(String favor, boolean isMakeOn){
         Cursor cursor=database_menu.rawQuery("SELECT menuName, OnOff FROM " + TABLE_NAME + " WHERE " + favor + "=?",new String[]{"1"});

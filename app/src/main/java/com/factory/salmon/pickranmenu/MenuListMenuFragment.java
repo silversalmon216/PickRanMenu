@@ -38,12 +38,6 @@ public class MenuListMenuFragment extends Fragment {
         }
         isOnList=G.main.menuDataBase.GetArrayList("OnOff");
 
-//        StringBuffer buffer=new StringBuffer();
-//        for(int i=0;i<menuList.size();i++){
-//            buffer.append(menuList.get(i)+" : "+isOnList.get(i)+"\n");
-//        }
-//        new AlertDialog.Builder(G.main).setMessage(buffer.toString()).setPositiveButton("OK",null).create().show();
-
         recyclerView.setAdapter(new RecyclerView.Adapter() {
             @NonNull
             @Override

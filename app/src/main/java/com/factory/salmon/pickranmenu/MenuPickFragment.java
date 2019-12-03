@@ -22,9 +22,6 @@ public class MenuPickFragment extends Fragment {
     RecyclerView recycler;
     int[] menuNumMaxResult;
     int[] menuNumResult;
-//    ArrayList<String> menuName;
-//    ArrayList<Integer> menuUri;
-//    ArrayList<Integer> menuIndex=new ArrayList<>();
     ArrayList<MenuItem> menu=new ArrayList<>();
     ArrayList<MaterialCheckBox> checkBoxArray=new ArrayList<>();
 
@@ -36,25 +33,18 @@ public class MenuPickFragment extends Fragment {
 
         for(int i=0;i<3;i++) {
             ArrayList<MenuItem> list = G.main.menuDataBase.GetRankingList(i, menuNumMaxResult[i]);
-            Collections.shuffle(list);
+            for(MenuItem m : list)
+                for(int n=0;n<menu.size()-1;n++)
+                    if(menu.get(n).name.equals(m.name))
+                        menu.remove(n);
+
+//                for(MenuItem n : menu)
+//                    if(n.name.equals(m.name))
+//                        menu.remove(n);
+
             menu.addAll(list.subList(0, menuNumResult[i]));
         }
         Collections.shuffle(menu);
-
-//        Random random=new Random();
-//        for(int i=menuNumResult[0];i>0;i--){
-//            int index=random.nextInt(menuNumMaxResult[0]);
-//
-//            boolean isSame=false;
-//            for(int num : menuIndex){
-//                if(num==index){
-//                    isSame=true;
-//                    break;
-//                }
-//            }
-//            if(isSame){ i++;    continue; }
-//            menuIndex.add(index);
-//        }
 
     }
 
@@ -91,7 +81,7 @@ public class MenuPickFragment extends Fragment {
 
             @Override
             public int getItemCount() {
-                return menuNumResult[0]+menuNumResult[1]+menuNumResult[2];
+                return menu.size();
             }
 
             class ViewHolder extends RecyclerView.ViewHolder{

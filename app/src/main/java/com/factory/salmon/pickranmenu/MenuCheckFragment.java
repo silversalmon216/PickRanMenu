@@ -1,6 +1,5 @@
 package com.factory.salmon.pickranmenu;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,10 +25,6 @@ public class MenuCheckFragment extends Fragment {
         this.bundle=bundle;
         ArrayList<String> menuNameList=bundle.getStringArrayList("menuNameList");
         ArrayList<Integer> menuUriList=bundle.getIntegerArrayList("menuUriList");
-//        String str="";
-//        for(int i : menuUriList)
-//            str+=i+"\n";
-//        new AlertDialog.Builder(G.main).setMessage(str).setPositiveButton("OK",null).create().show();
         ArrayList<String> newMenuNameList=new ArrayList<>();
         for(String s : menuNameList)
             newMenuNameList.add(s);
