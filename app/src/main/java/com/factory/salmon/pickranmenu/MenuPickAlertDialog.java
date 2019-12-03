@@ -22,8 +22,8 @@ public class MenuPickAlertDialog {
 
     RecyclerView recycler;
 
-    int[] menuNumMaxResult=new int[3];
-    int[] menuNumResult=new int[3];
+    int[] menuNumMaxResult=new int[4];
+    int[] menuNumResult=new int[4];
 
     public MenuPickAlertDialog() {
 
@@ -102,7 +102,7 @@ public class MenuPickAlertDialog {
 
             @Override
             public int getItemCount() {
-                return 3;
+                return G.menuNum.length;
             }
 
             class ViewHolder extends RecyclerView.ViewHolder{

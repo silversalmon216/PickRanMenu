@@ -63,7 +63,8 @@ public class MenuListNumFragment extends Fragment {
                         String key="";
                         if(position==0) key=G.main.PREFERENCES_KEY_NUM_RECENT_SELECT;
                         else if(position==1)    key=G.main.PREFERENCES_KEY_NUM_FAVORITE_SELECT;
-                        else if(position==2)    key=G.main.PREFERENCES_KEY_NUM_SERVER_SELECT;
+                        else if(position==2)    key=G.main.PREFERENCES_KEY_NUM_LIST_SELECT;
+                        else if(position==3)    key=G.main.PREFERENCES_KEY_NUM_SERVER_SELECT;
                         G.main.SetMenuNum(key,i);
                         G.menuNumSelect[position]=i;
 
@@ -91,7 +92,8 @@ public class MenuListNumFragment extends Fragment {
                         String key="";
                         if(position==0)    key=G.main.PREFERENCES_KEY_NUM_RECENT;
                         else if(position==1)   key=G.main.PREFERENCES_KEY_NUM_FAVORITE;
-                        else if(position==2)   key=G.main.PREFERENCES_KEY_NUM_SERVER;
+                        else if(position==2)   key=G.main.PREFERENCES_KEY_NUM_LIST;
+                        else if(position==3)   key=G.main.PREFERENCES_KEY_NUM_SERVER;
                         G.main.SetMenuNum(key,i);
                         G.menuNum[position]=i;
                     }
@@ -116,7 +118,7 @@ public class MenuListNumFragment extends Fragment {
 
             @Override
             public int getItemCount() {
-                return 3;
+                return G.menuNum.length;
             }
 
             class VH extends RecyclerView.ViewHolder{

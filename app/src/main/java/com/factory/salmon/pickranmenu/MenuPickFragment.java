@@ -34,7 +34,7 @@ public class MenuPickFragment extends Fragment {
         menuNumMaxResult=bundle.getIntArray("MenuNumMaxResult");
         menuNumResult=bundle.getIntArray("MenuNumResult");
 
-        for(int i=0;i<2;i++) {
+        for(int i=0;i<3;i++) {
             ArrayList<MenuItem> list = G.main.menuDataBase.GetRankingList(i, menuNumMaxResult[i]);
             Collections.shuffle(list);
             menu.addAll(list.subList(0, menuNumResult[i]));
@@ -91,7 +91,7 @@ public class MenuPickFragment extends Fragment {
 
             @Override
             public int getItemCount() {
-                return menuNumResult[0]+menuNumResult[1];
+                return menuNumResult[0]+menuNumResult[1]+menuNumResult[2];
             }
 
             class ViewHolder extends RecyclerView.ViewHolder{

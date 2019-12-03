@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     public final static String PREFERENCES_KEY_NUM_FAVORITE="MyNumFavorite";
     public final static String PREFERENCES_KEY_NUM_FAVORITE_MAX="MyNumMaxFavorite";
     public final static String PREFERENCES_KEY_NUM_FAVORITE_SELECT="MyNumSelectFavorite";
+    public final static String PREFERENCES_KEY_NUM_LIST="MyNumList";
+    public final static String PREFERENCES_KEY_NUM_LIST_MAX="MyNumMaxList";
+    public final static String PREFERENCES_KEY_NUM_LIST_SELECT="MyNumSelectList";
     public final static String PREFERENCES_KEY_NUM_SERVER="ServerNumFavorite";
     public final static String PREFERENCES_KEY_NUM_SERVER_MAX="ServerNumMaxFavorite";
     public final static String PREFERENCES_KEY_NUM_SERVER_SELECT="ServerNumSelectFavorite";
@@ -87,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
             edit.putInt(PREFERENCES_KEY_NUM_FAVORITE,3);
             edit.putInt(PREFERENCES_KEY_NUM_FAVORITE_MAX,10);
             edit.putInt(PREFERENCES_KEY_NUM_FAVORITE_SELECT,5);
+            edit.putInt(PREFERENCES_KEY_NUM_LIST, 4);
+            edit.putInt(PREFERENCES_KEY_NUM_LIST_MAX, 10);
+            edit.putInt(PREFERENCES_KEY_NUM_LIST_SELECT,8);
             edit.putInt(PREFERENCES_KEY_NUM_SERVER,0);
             edit.putInt(PREFERENCES_KEY_NUM_SERVER_MAX,0);
             edit.putInt(PREFERENCES_KEY_NUM_SERVER_SELECT,0);
@@ -96,15 +103,20 @@ public class MainActivity extends AppCompatActivity {
 
         G.menuNumMax[0]=preferences_database.getInt(PREFERENCES_KEY_NUM_RECENT_MAX,0);
         G.menuNumMax[1]=preferences_database.getInt(PREFERENCES_KEY_NUM_FAVORITE_MAX,0);
-        G.menuNumMax[2]=!G.isUseServer ? 0 : preferences_database.getInt(PREFERENCES_KEY_NUM_SERVER_MAX,0);
+        G.menuNumMax[2]=preferences_database.getInt(PREFERENCES_KEY_NUM_LIST_MAX,0);
+        G.menuNumMax[3]=!G.isUseServer ? 0 : preferences_database.getInt(PREFERENCES_KEY_NUM_SERVER_MAX,0);
 
         G.menuNum[0]=preferences_database.getInt(PREFERENCES_KEY_NUM_RECENT,0);
         G.menuNum[1]=preferences_database.getInt(PREFERENCES_KEY_NUM_FAVORITE,0);
-        G.menuNum[2]=preferences_database.getInt(PREFERENCES_KEY_NUM_SERVER,0);
+        G.menuNum[2]=preferences_database.getInt(PREFERENCES_KEY_NUM_LIST,0);
+        G.menuNum[3]=preferences_database.getInt(PREFERENCES_KEY_NUM_SERVER,0);
 
         G.menuNumSelect[0]=preferences_database.getInt(PREFERENCES_KEY_NUM_RECENT_SELECT,0);
         G.menuNumSelect[1]=preferences_database.getInt(PREFERENCES_KEY_NUM_FAVORITE_SELECT,0);
-        G.menuNumSelect[2]=preferences_database.getInt(PREFERENCES_KEY_NUM_SERVER_SELECT,0);
+        G.menuNumSelect[2]=preferences_database.getInt(PREFERENCES_KEY_NUM_LIST_SELECT,0);
+        G.menuNumSelect[3]=preferences_database.getInt(PREFERENCES_KEY_NUM_SERVER_SELECT,0);
+
+        menuDataBase.GetMaxNum();
 
         String[] favor=getResources().getStringArray(R.array.favor);
         G.favorOnOff=new Boolean[favor.length];
@@ -167,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch(item.getItemId()){
                 case R.id.Main_Bottom_menu_picture:
-
+                    new AlertDialog.Builder(MainActivity.this).setMessage("준비중입니다.").setPositiveButton("OK",null).create().show();
                     break;
 
                 case R.id.Main_Bottom_menu_restaurant:
@@ -176,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.Main_Bottom_menu_search:
-
+                    new AlertDialog.Builder(MainActivity.this).setMessage("준비중입니다.").setPositiveButton("OK",null).create().show();
                     break;
 
             }
