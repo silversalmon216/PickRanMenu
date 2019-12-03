@@ -142,7 +142,7 @@ public class MenuDataBase {
                     G.menuNum[i]=num;
             }
         else if(G.menuNumMax[i]<11)
-            G.menuNumMax[i]=num;
+            G.menuNumMax[i]=num>10 ? 10 : num;
 
     }
 

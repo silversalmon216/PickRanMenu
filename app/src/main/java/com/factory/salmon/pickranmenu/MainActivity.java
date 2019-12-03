@@ -87,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
 
             edit.putInt(PREFERENCES_KEY_NUM_RECENT,5);
             edit.putInt(PREFERENCES_KEY_NUM_RECENT_MAX,10);
-            edit.putInt(PREFERENCES_KEY_NUM_RECENT_SELECT,7);
-            edit.putInt(PREFERENCES_KEY_NUM_FAVORITE,3);
+            edit.putInt(PREFERENCES_KEY_NUM_RECENT_SELECT,10);
+            edit.putInt(PREFERENCES_KEY_NUM_FAVORITE,5);
             edit.putInt(PREFERENCES_KEY_NUM_FAVORITE_MAX,10);
-            edit.putInt(PREFERENCES_KEY_NUM_FAVORITE_SELECT,5);
-            edit.putInt(PREFERENCES_KEY_NUM_LIST, 4);
+            edit.putInt(PREFERENCES_KEY_NUM_FAVORITE_SELECT,10);
+            edit.putInt(PREFERENCES_KEY_NUM_LIST, 5);
             edit.putInt(PREFERENCES_KEY_NUM_LIST_MAX, 10);
-            edit.putInt(PREFERENCES_KEY_NUM_LIST_SELECT,8);
+            edit.putInt(PREFERENCES_KEY_NUM_LIST_SELECT,10);
             edit.putInt(PREFERENCES_KEY_NUM_SERVER,0);
             edit.putInt(PREFERENCES_KEY_NUM_SERVER_MAX,0);
             edit.putInt(PREFERENCES_KEY_NUM_SERVER_SELECT,0);
