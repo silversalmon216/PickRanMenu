@@ -84,8 +84,6 @@ public class MenuListNumFragment extends Fragment {
                     @Override public void onNothingSelected(AdapterView<?> adapterView) { }
                 });
 
-//                vh.spinnerMenuNum.setAdapter(new ArrayAdapter<>(G.main,R.layout.custom_simple_spinner_dropdown_item,arr));
-//                vh.spinnerMenuNum.setSelection(menuNum[position]);
                 vh.spinnerMenuNum.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
