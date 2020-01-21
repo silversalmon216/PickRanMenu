@@ -166,6 +166,9 @@ public class MainActivity extends AppCompatActivity {
                 currentFragment=new MenuSelectFragment(bundle);
                 break;
 
+            case 6:
+                break;
+
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.Main_frame,currentFragment).commit();
@@ -179,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch(item.getItemId()){
                 case R.id.Main_Bottom_menu_picture:
+                    FragmentChange(6,null);
                     new AlertDialog.Builder(MainActivity.this).setMessage("준비중입니다.").setPositiveButton("OK",null).create().show();
                     break;
 
